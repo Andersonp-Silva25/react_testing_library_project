@@ -34,6 +34,13 @@ describe('Requisito 5 - Teste o componente Pokedex.js', () => {
     });
   });
 
+  test('Teste se é mostrado apenas um pokémon por vez', () => {
+    renderWithRouter(<App />);
+
+    const pokemon = screen.getAllByTestId('pokemon-name');
+    expect(pokemon.length).toBe(1);
+  });
+
   test('Teste se a Pokédex tem botões de filtro', () => {
     renderWithRouter(<App />);
 
@@ -44,15 +51,21 @@ describe('Requisito 5 - Teste o componente Pokedex.js', () => {
       'Dragon',
     ];
 
-    const allButton = screen.getByRole('button', { name: /all/i });
     const filterButtons = screen.getAllByTestId('pokemon-type-button');
 
     filterButtons.forEach((button, index) => {
-      expect(allButton).toBeInTheDocument();
       expect(button).toBeInTheDocument();
       expect(button.innerHTML).toBe(typeButtons[index]);
       expect(button).toHaveAttribute('data-testid', 'pokemon-type-button');
     });
+  });
+
+  test('Testa se o botão "All" está sempre visivel', () => {
+    renderWithRouter(<App />);
+
+    const button = screen.getByRole('button', { name: /all/i });
+    expect(button).toBeInTheDocument();
+    userEvent.click(button);
   });
 
   test('Teste se a Pokédex tem um botão para resetar os filtros', () => {
