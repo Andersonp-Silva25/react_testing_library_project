@@ -5,7 +5,7 @@ import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 import data from '../data';
 
-describe('Requisito 6 - Teste o componente Pokemon.js', () => {
+describe('Requisito 6 - Teste o componente Pokemon.js ', () => {
   test('Teste se é renderizado um card com as informações do pokémon', () => {
     renderWithRouter(<App />);
 
